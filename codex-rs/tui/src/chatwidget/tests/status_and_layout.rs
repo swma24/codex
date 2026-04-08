@@ -104,7 +104,7 @@ async fn turn_started_uses_runtime_context_window_before_first_token_count() {
         .expect("context window line");
 
     assert!(
-        context_line.contains("950K"),
+        context_line.contains("938K"),
         "expected /status to use TurnStarted context window, got: {context_line}"
     );
     assert!(

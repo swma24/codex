@@ -1085,7 +1085,7 @@ async fn status_snapshot_cached_limits_hide_credits_without_flag() {
 }
 
 #[tokio::test]
-async fn status_context_window_uses_last_usage() {
+async fn status_context_window_uses_effective_last_usage() {
     let temp_home = TempDir::new().expect("temp home");
     let mut config = test_config(&temp_home).await;
     config.model_context_window = Some(272_000);
@@ -1139,8 +1139,8 @@ async fn status_context_window_uses_last_usage() {
         .expect("context line");
 
     assert!(
-        context_line.contains("13.7K used / 272K"),
-        "expected context line to reflect last usage tokens, got: {context_line}"
+        context_line.contains("1.68K used / 260K"),
+        "expected context line to reflect effective context tokens, got: {context_line}"
     );
     assert!(
         !context_line.contains("102K"),

@@ -326,8 +326,8 @@ impl StatusHistoryCell {
         };
         let context_window = context_window.map(|window| StatusContextWindowData {
             percent_remaining: context_usage.percent_of_context_window_remaining(window),
-            tokens_in_context: context_usage.tokens_in_context_window(),
-            window,
+            tokens_in_context: context_usage.effective_tokens_in_context_window(),
+            window: TokenUsage::effective_context_window(window),
         });
 
         let token_usage = StatusTokenUsageData {
