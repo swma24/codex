@@ -2016,6 +2016,14 @@ impl TokenUsage {
         self.total_tokens
     }
 
+    pub fn effective_context_window(context_window: i64) -> i64 {
+        (context_window - BASELINE_TOKENS).max(0)
+    }
+
+    pub fn effective_tokens_in_context_window(&self) -> i64 {
+        (self.tokens_in_context_window() - BASELINE_TOKENS).max(0)
+    }
+
     /// Estimate the remaining user-controllable percentage of the model's context window.
     ///
     /// `context_window` is the total size of the model's context window.
@@ -2031,8 +2039,8 @@ impl TokenUsage {
             return 0;
         }
 
-        let effective_window = context_window - BASELINE_TOKENS;
-        let used = (self.tokens_in_context_window() - BASELINE_TOKENS).max(0);
+        let effective_window = Self::effective_context_window(context_window);
+        let used = self.effective_tokens_in_context_window();
         let remaining = (effective_window - used).max(0);
         ((remaining as f64 / effective_window as f64) * 100.0)
             .clamp(0.0, 100.0)
