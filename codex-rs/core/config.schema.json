@@ -362,6 +362,9 @@
             "connectors": {
               "type": "boolean"
             },
+            "debug_hide_spawn_agent_metadata": {
+              "type": "boolean"
+            },
             "default_mode_request_user_input": {
               "type": "boolean"
             },
@@ -2072,6 +2075,9 @@
         "connectors": {
           "type": "boolean"
         },
+        "debug_hide_spawn_agent_metadata": {
+          "type": "boolean"
+        },
         "default_mode_request_user_input": {
           "type": "boolean"
         },
@@ -2423,7 +2429,7 @@
           "$ref": "#/definitions/Notice"
         }
       ],
-      "description": "Collection of in-product notices (different from notifications) See [`codex_config::types::Notice`] for more details"
+      "description": "Collection of in-product notices (different from notifications) See [`crate::types::Notice`] for more details"
     },
     "notify": {
       "default": null,
